@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitelutions DDNS Client README</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            background-color: #f6f8fa;
+            color: #24292e;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 45px;
+        }
+        h1, h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        h1 { font-size: 2em; }
+        h2 { font-size: 1.5em; }
+        p { margin-top: 0; margin-bottom: 16px; }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul, ol { padding-left: 2em; margin-bottom: 16px; }
+        li { margin-bottom: 0.25em; }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            padding: 0.2em 0.4em;
+        }
+        pre > code {
+            padding: 0;
+            margin: 0;
+            font-size: 100%;
+            word-break: normal;
+            white-space: pre;
+            background: transparent;
+            border: 0;
+        }
+        hr {
+            height: .25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+        strong {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p align="center">
+            <img src="https://sitelutions.com/images/logo.svg" alt="Sitelutions Logo" width="300">
+        </p>
+        
+        <h1>Sitelutions Dynamic DNS (DDNS) Client for Windows</h1>
+        
+        <p>This is the official Sitelutions DDNS client for Windows. It is a lightweight application that runs in your system tray, automatically detects your public IP address, and updates your Sitelutions DNS records.</p>
+        
+        <p align="center">
+            <img src="https://sitelutions.com/images/apps/ddns.jpg" alt="Sitelutions DDNS Client Screenshot" width="709">
+        </p>
+        
+        <h2>Features</h2>
+        
+        <ul>
+            <li><strong>Automatic Updates:</strong> Set and forget. Updates your IP at regular intervals (60 minutes, 4 hours, 6 hours, or 24 hours).</li>
+            <li><strong>System Tray Icon:</strong> Hides to the system tray (notification area) to stay out of your way.</li>
+            <li><strong>Saves Settings:</strong> Remembers your Record ID, Email, and API Key securely in your user's AppData folder.</li>
+            <li><strong>Activity Logging:</strong> A simple log window shows you the history of update attempts and server responses.</li>
+            <li><strong>Manual Update:</strong> A "Update Now" button to force an IP check and update immediately.</li>
+            <li><strong>Lightweight:</strong> Built with Python, it has minimal system resource usage.</li>
+        </ul>
+        
+        <hr>
+        
+        <h2>How to Find Your Record ID</h2>
+        
+        <p>The "Record ID" is required for the application to know <em>which</em> DNS record to update. You can find this ID in your Sitelutions dashboard:</p>
+        
+        <ol>
+            <li>Log in to your Sitelutions account.</li>
+            <li>Navigate to <strong>DNS Management</strong> from the side menu.</li>
+            <li>Find the domain you wish to update (e.g., <code>yourdomain.com</code>) and click the <strong>three-dot menu (...)</strong> on the right.</li>
+            <li>Select <strong>Manage</strong> from the dropdown.</li>
+            <li>On the "DNS Records" page, locate the specific <strong>A Record</strong> you want to keep updated (e.g., <code>home.yourdomain.com</code>).</li>
+            <li>Click the <strong>three-dot menu (...)</strong> on the far right of that record's row.</li>
+            <li>Select <strong>Dynamic DNS</strong> from the dropdown.</li>
+            <li>The next page will display the <strong>"Record identifier"</strong>. This numeric ID is what you will paste into the "Record ID" field of the DDNS client.</li>
+        </ol>
+        
+        <hr>
+        
+        <h2>Installation &amp; Usage</h2>
+        
+        <p>You have two options to use this application: downloading the pre-compiled <code>.exe</code> (recommended for most users) or running the script from the source code (for developers).</p>
+        
+        <h3>Option 1: For End-Users (Recommended)</h3>
+        
+        <ol>
+            <li>Go to the <a href="https://github.com/HuxtonCo/sitelutions/releases/latest"><strong>Releases</strong></a> page of this repository.</li>
+            <li>Download the latest <code>Sitelutions-DDNS-Updater.exe</code> file.</li>
+            <li>Place the <code>.exe</code> file in any folder on your computer and run it. The application will start and your settings will be saved automatically.</li>
+        </ol>
+        
+        <h3>Option 2: For Developers (Running from Source)</h3>
+        
+        <p>If you have Python installed, you can run the application directly from the source code.</p>
+        
+        <p><strong>1. Install Dependencies:</strong><br>
+        You will need Python 3 and a few libraries. You can install them using pip:</p>
+        <pre><code>pip install requests pystray pillow</code></pre>
+        
+        <p><strong>2. Run the Application:</strong><br>
+        Clone this repository (or download the files) and run the following command from the script's directory:</p>
+        <pre><code>python ddns_updater.py</code></pre>
+        <p><em>(Note: You may need to use <code>python3</code> instead of <code>python</code> depending on your system's setup.)</em></p>
+        
+        <hr>
+        
+        <h2>For Developers &amp; Contributors</h2>
+        
+        <h3>How to Build the .exe Yourself</h3>
+        
+        <p>If you want to modify the code and compile your own <code>.exe</code> file, you will need <code>PyInstaller</code>.</p>
+        
+        <p><strong>1. Install PyInstaller:</strong></p>
+        <pre><code>pip install pyinstaller</code></pre>
+        
+        <p><strong>2. Run the Build Command:</strong><br>
+        From the project's root directory (where <code>ddns_updater.py</code>, <code>icon.ico</code>, and <code>icon.png</code> are located), run the following command:</p>
+        <pre><code>pyinstaller --onefile --noconsole --name SitelutionsUpdater --icon="icon.ico" --add-data="icon.png;." ddns_updater.py</code></pre>
+        
+        <ul>
+            <li><code>--onefile</code>: Bundles everything into a single executable.</li>
+            <li><code>--noconsole</code>: Prevents the black command-line window from opening (essential for tray apps).</li>
+            <li><code>--name</code>: Sets the output filename.</li>
+            <li><code>--icon="icon.ico"</code>: Sets the application and <code>.exe</code> file icon.</li>
+            <li><code>--add-data="icon.png;."</code>: <strong>Crucial Step.</strong> This bundles the <code>icon.png</code> file, which is required by the system tray icon.</li>
+        </ul>
+        
+        <p>Your new <code>.exe</code> file will be located in the <code>dist</code> folder.</p>
+        
+        <h3>Direct API (GET) Usage for Custom Scripts</h3>
+        
+        <p>This application uses the <code>api2.sitelutions.com</code> endpoint. You can use this same endpoint for your own custom scripts, routers, or other devices. The API is designed for simplicity and compatibility, using a standard HTTP GET request.</p>
+        
+        <p><strong>Endpoint URL Format:</strong></p>
+        <pre><code>https://api2.sitelutions.com/dnsup?user=[YOUR_EMAIL]&pass=[YOUR_API_KEY]&id=[YOUR_RECORD_ID]&ip=[NEW_IP_ADDRESS]&ttl=60</code></pre>
+        
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><code>user</code>: Your Sitelutions login email.</li>
+            <li><code>pass</code>: Your API Key (generated in your Sitelutions account panel).</li>
+            <li><code>id</code>: The specific DNS Record ID(s) you want to update.</li>
+            <li><code>ip</code>: The new IP address you want to set.</li>
+            <li><code>ttl</code>: The Time-To-Live in seconds (e.g., <code>60</code>).</li>
+        </ul>
+        
+        <p><strong>Example (using cURL in a bash script):</strong></p>
+        
+        <pre><code># 1. Get your current public IP from the Sitelutions IP service
+MY_IP=$(curl -s https://api2.sitelutions.com/myip)
+
+# 2. Set your variables
+EMAIL="your_email@your_domain.com"
+API_KEY="YOUR_API_KEY"
+RECORD_ID="99234"
+
+# 3. Send the update request
+RESPONSE=$(curl -s "https://api2.sitelutions.com/dnsup?user=${EMAIL}&pass=${API_KEY}&id=${RECORD_ID}&ip=${MY_IP}&ttl=60")
+
+echo "Server Response: $RESPONSE"</code></pre>
+        
+        <h2>License</h2>
+        
+        <p>This project is licensed under the MIT License. See the <code>LICENSE.md</code> file for details.</p>
+    </div>
+</body>
+</html>
